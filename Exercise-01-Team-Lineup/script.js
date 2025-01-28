@@ -1,7 +1,21 @@
 const position = [
-{position : "Defender", players : []},
-{position : "Midfielder" , players : [] },
-{position : "Striker", players : []}]
+{position : "Defenders", players : []},
+{position : "Midfielders" , players : [] },
+{position : "Strikers", players : []}]
+
+//Exibe os jogadores na tela
+const rosterSection = document.getElementById ('roster')
+
+function displayRoster (){
+rosterSection.innerHTML = ''  
+position.forEach(obj => {
+  const playerLi = document.createElement ('li')
+  playerLi.textContent = `Position: ${obj.position}, Player: ${obj.players.length ? obj.players.map(player => `${player.name} - Number: ${player.number}`).join(', ') : 'No players'}`
+  rosterSection.appendChild(playerLi)
+})
+}
+
+displayRoster ()
 
 function addPlayer(){
   const playerSection = document.getElementById ('players-list') 
@@ -12,7 +26,7 @@ function addPlayer(){
   const lineup = document.createElement ('ul')
 
   
-  //Seleciona a posição do jogador
+
   const playerPosition = document.createElement('li')
   playerPosition.innerText = "Position: "
   const selectPosition = document.createElement ('select')
@@ -29,7 +43,6 @@ function addPlayer(){
   })
 
 
-  //Adiciona o nome do jogador
   const playerName = document.createElement ('li')
   playerName.innerText = "Name: "
   const nameInput = document.createElement ('input')
@@ -38,7 +51,7 @@ function addPlayer(){
   playerName.appendChild (nameInput)
   lineup.appendChild(playerName)
 
-  //Adiciona o numero de jogador
+
   const playerNumber = document.createElement('li')
   playerNumber.innerText = "Number: "
   const numberInput = document.createElement ('input')
@@ -47,6 +60,28 @@ function addPlayer(){
   playerNumber.appendChild(numberInput)
   lineup.appendChild (playerNumber)
 
+  const saveButton = document.createElement('button')
+  saveButton.innerText = "Save Player"
+  saveButton.onclick = function () {
+    const selectedPosition = selectPosition.value;
+    const playerNameValue = nameInput.value
+    const playerNumberValue = numberInput.value
 
+    const positionObject = position.find (pos => pos.position === selectedPosition)
+    if (positionObject) {
+    positionObject.players.push({name: playerNameValue, number: playerNumberValue})
+    
+    displayRoster ()
+
+    nameInput.value = "";
+    numberInput.value = "";
+    console.log(positionObject.players);
+  }
+
+  }
+
+
+  lineup.appendChild (saveButton)
   playerSection.append (player, lineup)
 }
+
