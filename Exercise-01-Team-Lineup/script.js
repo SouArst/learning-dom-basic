@@ -3,7 +3,7 @@ const position = [
 {position : "Midfielders" , players : [] },
 {position : "Strikers", players : []}]
 
-//Exibe os jogadores na tela
+
 const rosterSection = document.getElementById ('roster')
 
 function displayRoster (){
