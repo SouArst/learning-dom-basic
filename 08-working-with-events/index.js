@@ -6,7 +6,7 @@ function register (ev){
   const passwordConfirm = sectonElement.children.passwordConfirm.value
 
   if (password === passwordConfirm){
-    alert ("User " +username+ " successfully registered")
+    alert ("User " +username+ "successfully registered")
   } else {
     alert ("Passwords don't match")
   }
